@@ -1,14 +1,4 @@
-Login Form Styles
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
+/* Login Page Styles */
 .container {
   background-color: #fff;
   padding: 2rem;
@@ -16,6 +6,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  margin: 2rem auto;
   text-align: center;
 }
 
@@ -54,7 +45,7 @@ button {
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -62,6 +53,14 @@ button:hover {
 }
 
 p {
-  color: red;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
