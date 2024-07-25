@@ -22,16 +22,16 @@ const RegistrationPage = () => {
     }
     const user = { username, email, phoneNumber, password };
     dispatch(setUser(user));
-    navigate('/landing');
+    navigate('/login');
   };
 
   return (
     <div>
       <Navbar />
-      <div className="container">
+      <div className="registration-container">
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="registration-field">
             <label htmlFor="username">Username:</label>
             <input
               type="text"
@@ -40,7 +40,7 @@ const RegistrationPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div>
+          <div className="registration-field">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -49,7 +49,7 @@ const RegistrationPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div>
+          <div className="registration-field">
             <label htmlFor="phoneNumber">Phone Number:</label>
             <input
               type="tel"
@@ -58,7 +58,7 @@ const RegistrationPage = () => {
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>
-          <div>
+          <div className="registration-field">
             <label htmlFor="password">Password:</label>
             <input
               type="password"
@@ -67,7 +67,7 @@ const RegistrationPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div>
+          <div className="registration-field">
             <label htmlFor="confirmPassword">Confirm Password:</label>
             <input
               type="password"
@@ -76,7 +76,7 @@ const RegistrationPage = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Register</button>
+          <button type="submit" className="registration-button">Register</button>
         </form>
         <p>
           Already have an account? <Link to="/login">Login here</Link>

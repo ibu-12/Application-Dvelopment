@@ -5,7 +5,8 @@ import '../pages/css/Navbar.css';
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <ul>
+      <div className="navbar-brand">Fashion Rental</div>
+      <ul className="navbar-links">
         <li>
           <Link to="/">Home</Link>
         </li>

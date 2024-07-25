@@ -1,58 +1,54 @@
-/* Registration Page Styles */
-.container {
-  background-color: #fff;
+.registration-container {
+  width: 80%;
+  margin: 0 auto;
   padding: 2rem;
+  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 400px;
-  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.registration-container h2 {
   text-align: center;
-}
-
-h2 {
   margin-bottom: 1.5rem;
-  color: #333;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form div {
+.registration-field {
   margin-bottom: 1rem;
 }
 
-label {
+.registration-field label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #333;
 }
 
-input {
+.registration-field input {
+  width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
 }
 
-button {
+.registration-button {
+  width: 100%;
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #333;
+  color: white;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.registration-button:hover {
+  background-color: #555;
+}
+
+.registration-container p {
+  text-align: center;
   margin-top: 1rem;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-p {
-  margin-top: 1rem;
-  color: #555;
+.registration-container p a {
+  color: #333;
+  text-decoration: none;
 }

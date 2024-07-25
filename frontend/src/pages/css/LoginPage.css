@@ -1,66 +1,54 @@
-/* Login Page Styles */
-.container {
-  background-color: #fff;
+.login-container {
+  width: 80%;
+  margin: 0 auto;
   padding: 2rem;
+  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.login-container h2 {
   text-align: center;
-}
-
-h2 {
   margin-bottom: 1.5rem;
-  color: #333;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin-bottom: 0.5rem;
-  color: #555;
-  text-align: left;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 0.75rem;
+.login-field {
   margin-bottom: 1rem;
+}
+
+.login-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-button {
+.login-button {
+  width: 100%;
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #333;
+  color: white;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.login-button:hover {
+  background-color: #555;
 }
 
-p {
+.login-container p {
+  text-align: center;
   margin-top: 1rem;
 }
 
-a {
-  color: #007bff;
+.login-container p a {
+  color: #333;
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
