@@ -4,3 +4,10 @@ export const setUser = (user) => ({
     payload: user,
   });
   
+  // actions.js
+
+export const logoutUser = () => {
+  return {
+    type: 'LOGOUT_USER'
+  };
+};

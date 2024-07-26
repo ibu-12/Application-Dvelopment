@@ -34,3 +34,16 @@
 .navbar-links a:hover {
   text-decoration: underline;
 }
+
+.navbar .logout-button {
+  background: none;
+  border: none;
+  color: #f9fafa;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar .logout-button:hover {
+  text-decoration: underline;
+}

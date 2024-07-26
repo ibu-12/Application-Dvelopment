@@ -6,6 +6,9 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
 import LandingPage from './components/LandingPage';
+import SustainabilityPage from './components/SustainabiltyPage';
+import AdminLoginPage from './components/AdminLoginPage';
+import AdminDashboard from './components/AdminDashboard';
 
 const App = () => {
   return (
@@ -16,6 +19,9 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/landing" element={<LandingPage />} />
+          <Route path="/sustainability" element={<SustainabilityPage/>}/>
+          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </Router>
     </Provider>

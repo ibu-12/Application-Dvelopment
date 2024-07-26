@@ -1,0 +1,83 @@
+/* Admin Dashboard Styles */
+.admin-dashboard {
+  display: flex;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.admin-profile {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.admin-nav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  margin: 0.5rem 0;
+}
+
+.admin-nav a:hover {
+  background-color: #555;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  background-color: #f1f1f1;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.topbar-left {
+    flex: 1;
+  }
+  .home-link {
+    color: #151515;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .home-link:hover {
+    text-decoration: underline;
+  }
+.admin-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.admin-profile-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #333;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.admin-username {
+  font-weight: bold;
+}
+
+.admin-content {
+  padding: 2rem;
+}
