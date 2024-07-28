@@ -1,17 +1,15 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../redux/actions'; // Adjust the import path as needed
+import { Link } from 'react-router-dom';
 import '../pages/css/Navbar.css';
+import { logoutUser } from '../redux/actions';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logoutUser()); // Call the action to log out the user
-    navigate('/'); // Redirect to the home page or login page
+    dispatch(logoutUser());
   };
 
   return (
@@ -32,15 +30,17 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            {user.isAdmin && (
+            {user.isAdmin ? (
               <li>
                 <Link to="/admin/dashboard">Admin Dashboard</Link>
               </li>
+            ) : (
+              <li>
+                <Link to="/user/dashboard">User Dashboard</Link>
+              </li>
             )}
             <li>
-              <button onClick={handleLogout} className="logout-button">
-                Logout
-              </button>
+              <button onClick={handleLogout} className="logout-button">Logout</button>
             </li>
           </>
         )}

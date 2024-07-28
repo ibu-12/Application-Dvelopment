@@ -9,6 +9,7 @@ import LandingPage from './components/LandingPage';
 import SustainabilityPage from './components/SustainabiltyPage';
 import AdminLoginPage from './components/AdminLoginPage';
 import AdminDashboard from './components/AdminDashboard';
+import UserDashboard from './components/UserDashboard';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/sustainability" element={<SustainabilityPage/>}/>
           <Route path="/admin-login" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/user/dashboard" element={<UserDashboard />} /> 
         </Routes>
       </Router>
     </Provider>

@@ -16,10 +16,19 @@ const RegistrationPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Check if all fields are filled
+    if (!username || !email || !phoneNumber || !password || !confirmPassword) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    // Check if passwords match
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
+
     const user = { username, email, phoneNumber, password };
     dispatch(setUser(user));
     navigate('/login');

@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import '../pages/css/SustainabilityPage.css';
-import sustainabilityImage1 from '../pages/main home.jpg'; // Replace with the actual image path
+import sustainabilityImage1 from '../pages/c5.jpg'; // Replace with the actual image path
 import sustainabilityImage2 from '../pages/C1.jpg'; // Replace with the actual image path
 import sustainabilityImage3 from '../pages/C2.jpg'; // Replace with the actual image path
 
