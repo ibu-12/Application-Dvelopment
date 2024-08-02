@@ -47,6 +47,9 @@ const Navbar = () => {
         <li>
           <Link to="/sustainability">Sustainability</Link>
         </li>
+        <li>
+          <Link to="/landing">About Us</Link>
+        </li>
       </ul>
     </nav>
   );

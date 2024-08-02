@@ -16,7 +16,7 @@ const LoginPage = () => {
     if (username && password) {
       const user = { username, password };
       dispatch(setUser(user));
-      navigate('/landing');
+      navigate('/user/dashboard');
     }
   };
 

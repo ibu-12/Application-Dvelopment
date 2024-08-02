@@ -57,7 +57,7 @@ const AdminDashboard = () => {
       <div className="admin-sidebar">
         <div className="admin-profile">
           <img src={profilePic} alt="Profile" className="admin-profile-pic" />
-          <p>Hi, {user.username}</p>
+          <p>Hi, Ibu</p>
         </div>
         <nav className="admin-nav">
           <Link to="#" onClick={() => setActiveSection('dashboard')}>Dashboard</Link>
@@ -73,7 +73,7 @@ const AdminDashboard = () => {
           </div>
           <div className="admin-user-info">
             <i className="admin-profile-icon"></i>
-            <span className="admin-username">{user.username}</span>
+            <span className="admin-username">Ibu</span>
           </div>
         </div>
         <div className="admin-content">

@@ -5,18 +5,17 @@ import { Bar, Pie } from 'react-chartjs-2';
 import 'chart.js/auto'; // Required for Chart.js to work
 import '../pages/css/UserDashboard.css'; // Import the CSS file
 import profilePic from '../pages/C1.jpg'; // Ensure this image is present
-import p1 from '../pages/p1.jpg'; // Ensure this image is present
-import p2 from '../pages/p2.jpg'; // Ensure this image is present
-import p3 from '../pages/p3.jpg'; // Ensure this image is present
-import p4 from '../pages/p4.jpg'; // Ensure this image is present
-import p5 from '../pages/p5.jpg'; // Ensure this image is present
-import p6 from '../pages/p6.jpg'; // Ensure this image is present
-import p7 from '../pages/p7.jpg'; // Ensure this image is present
-import p8 from '../pages/p8.jpg'; // Ensure this image is present
-import p9 from '../pages/p9.jpg'; // Ensure this image is present
 import { logoutUser } from '../redux/actions'; // Import your logout action
+import Products from './Products';
+import Cart from './Cart';
 
 const UserDashboard = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
+
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -58,17 +57,7 @@ const UserDashboard = () => {
   ];
 
   // Sample data for the products
-  const products = [
-    { id: 'p001', image: p1, name: 'Red Dress', price: '$50', size: 'M', color: 'Red' },
-    { id: 'p002', image: p2, name: 'Blue Jeans', price: '$40', size: 'L', color: 'Blue' },
-    { id: 'p003', image: p3, name: 'Green Jacket', price: '$60', size: 'XL', color: 'Green' },
-    { id: 'p004', image: p4, name: 'Yellow Top', price: '$30', size: 'S', color: 'Yellow' },
-    { id: 'p005', image: p5, name: 'Black Shoes', price: '$80', size: '42', color: 'Black' },
-    { id: 'p006', image: p6, name: 'White Hat', price: '$20', size: 'One Size', color: 'White' },
-    { id: 'p007', image: p7, name: 'Purple Scarf', price: '$25', size: 'One Size', color: 'Purple' },
-    { id: 'p008', image: p8, name: 'Orange Skirt', price: '$35', size: 'M', color: 'Orange' },
-    { id: 'p009', image: p9, name: 'Pink Blouse', price: '$45', size: 'L', color: 'Pink' },
-  ];
+ 
 
   const handleLogout = () => {
     
@@ -80,12 +69,13 @@ const UserDashboard = () => {
       <div className="user-sidebar">
         <div className="user-profile">
           <img src={profilePic} alt="Profile" className="user-profile-pic" />
-          <p>Hi, {user.username}</p>
+          <p>Hi, Ibu</p>
         </div>
         <nav className="user-nav">
           <button onClick={() => setActiveSection('dashboard')}>Dashboard</button>
           <button onClick={() => setActiveSection('orders')}>Orders</button>
           <button onClick={() => setActiveSection('offers')}>Offers</button>
+          <button onClick={() => setActiveSection('cart')}>Cart</button>
           <button onClick={() => setActiveSection('products')}>Products</button>
           <button onClick={handleLogout} className="user-logout">Logout</button>
         </nav>
@@ -97,7 +87,7 @@ const UserDashboard = () => {
           </div>
           <div className="user-user-info">
             <img src={profilePic} className="user-profile-icon"></img>
-            <span className="user-username">{user.username}</span>
+            <span className="user-username">Ibu</span>
           </div>
         </div>
         <div className="user-content">
@@ -151,22 +141,10 @@ const UserDashboard = () => {
               </div>
             </div>
           )}
-          {activeSection === 'products' && (
-            <div className="user-products-section">
-              <h1 className="user-products-heading">Products</h1>
-              <div className="user-product-grid">
-                {products.map((product, index) => (
-                  <div className="user-product-card" key={index}>
-                    <img src={product.image} alt={product.name} className="user-product-image" />
-                    <h2 className="user-product-name">{product.name}</h2>
-                    <p className="user-product-price">{product.price}</p>
-                    <p className="user-product-size">Size: {product.size}</p>
-                    <p className="user-product-color">Color: {product.color}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {activeSection === 'orders' && <div>Orders Content</div>}
+          {activeSection === 'offers' && <div>Offers Content</div>}
+          {activeSection === 'products' && <Products addToCart={addToCart} />}
+          {activeSection === 'cart' && <Cart cartItems={cartItems} />}
           {/* Handle other sections like 'orders' and 'offers' similarly */}
         </div>
       </div>

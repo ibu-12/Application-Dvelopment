@@ -2,6 +2,7 @@
 
 const initialState = {
   user: null,
+  
   // other states
 };
 
@@ -17,6 +18,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: null,
       };
+      
     // other cases
     default:
       return state;
