@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -19,8 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "user_data")
-public class User {
+@Table(name = "user_profile")
+public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,14 @@ public class User {
     private String password;
     private String mobile;
     private int age;
+    
+    // Additional fields
+    private String image;
+    private String gender;
+    private String location;
+    private String contactInfo;
 
-    @OneToOne(mappedBy = "user")
-    private UserProfile userProfile;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
