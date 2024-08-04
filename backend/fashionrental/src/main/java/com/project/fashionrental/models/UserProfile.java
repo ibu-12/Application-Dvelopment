@@ -38,7 +38,5 @@ public class UserProfile {
     private String location;
     private String contactInfo;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    
 }
