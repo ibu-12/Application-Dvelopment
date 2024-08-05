@@ -5,6 +5,7 @@ import com.project.fashionrental.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addProduct")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         Product savedProduct = productService.addProduct(product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
     @GetMapping("/getProductById/{id}")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')") 
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);
         if (product != null) {

@@ -1,0 +1,98 @@
+/* Landing Page Styles */
+.landing-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.landing-slideshow-container {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+}
+
+.landing-slide-container {
+  position: relative;
+}
+
+.landing-slide-image {
+  width: 100%;
+  height: 85vh;
+  display: block;
+}
+
+.landing-prev, .landing-next {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.landing-prev {
+  left: 0;
+}
+
+.landing-next {
+  right: 0;
+}
+
+.landing-prev:hover, .landing-next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.landing-about-us-section {
+  margin: 2rem 0;
+}
+
+.landing-about-us-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-about-us-image {
+  width: 50%;
+  margin-right: 1rem;
+}
+
+.landing-about-us-text {
+  text-align: left;
+  max-width: 50%;
+}
+
+.landing-why-us-section {
+  margin: 2rem 0;
+}
+
+.landing-why-us-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.landing-why-us-column {
+  width: 23%;
+  text-align: left;
+}
+
+.landing-footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f1f1f1;
+  color: #555;
+  border-top: 1px solid #ddd;
+}
+
+.landing-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.landing-footer a:hover {
+  text-decoration: underline;
+}

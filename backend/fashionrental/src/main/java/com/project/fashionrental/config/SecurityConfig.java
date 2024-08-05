@@ -40,14 +40,15 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
                 return httpSecurity
-                                .cors(corsConfirguarationSource -> corsConfirguarationSource.configurationSource(
-                                                corsConfigurationSource()))
+                                // .cors(corsConfirguarationSource -> corsConfirguarationSource.configurationSource(
+                                                // corsConfigurationSource()))
                                 .csrf(AbstractHttpConfigurer::disable)
                                 .authorizeHttpRequests(
                                                 request -> request.requestMatchers(
                                                                 "/api/users/createUser",
                                                                 "/api/auth/home",
-                                                                "/api/auth/authenticate").permitAll())
+                                                                "/api/auth/authenticate",
+                                                                "/api/users/welcome").permitAll())
                                 .authorizeHttpRequests(request -> request
                                                 .requestMatchers(
                                                                 "/v3/api-docs/**",
@@ -58,8 +59,8 @@ public class SecurityConfig {
                                                 .requestMatchers(
                                                                 "/api/users/**",
                                                                 "/api/auth/**",
-                                                                "/api/course/**",
-                                                                "/api/enrollments/**")
+                                                                "/api/orders/**",
+                                                                "/api/product/**")
                                                 .authenticated())
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
