@@ -5,6 +5,7 @@ import com.project.fashionrental.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/addOrder")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {
         Order savedOrder = orderService.addOrder(order);
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
@@ -33,12 +35,14 @@ public class OrderController {
     }
 
     @GetMapping("/getAllOrders")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
     }
 
     @DeleteMapping("/deleteOrderById/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> deleteOrderById(@PathVariable Long id) {
         boolean deleted = orderService.deleteOrderById(id);
         if (deleted) {

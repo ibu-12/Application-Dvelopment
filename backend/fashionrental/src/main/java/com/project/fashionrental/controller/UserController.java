@@ -26,7 +26,6 @@ public String welcome(){
 }
 
     @PostMapping("/createUser")
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);

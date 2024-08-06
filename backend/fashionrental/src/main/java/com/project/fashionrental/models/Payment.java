@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,23 +20,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "order_data")
-public class Order {
-
+@Table(name = "payment_data")
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
-    private Date orderDate;
-    private Date deliveryDate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @OneToOne(mappedBy = "order")
-    private Payment payment;
+    private Long paymentId;
+    private Date paymentDate;
+    private Long amount;
 
     @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "productId")
-    private Product product;
+    @JoinColumn(name = "order_id", referencedColumnName = "orderId")
+    private Order order;
 }
