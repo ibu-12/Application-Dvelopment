@@ -32,7 +32,7 @@ public String welcome(){
     }
 
     @GetMapping("/getUserById/{id}")
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         if (user != null) {
@@ -44,14 +44,14 @@ public String welcome(){
 
     @GetMapping("getUserByEmail/{email}")
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
-    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         Optional<User> user = userService.getUserByEmail(email);
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/getAllUsers")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    // @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
@@ -74,5 +74,16 @@ public String welcome(){
             @RequestBody UpdateRequest updateRequest) {
         User updated = userService.updateUser(email, updateRequest);
         return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateUserById/{id}")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    public ResponseEntity<User> updateUserById(@PathVariable Long id, @RequestBody User user) {
+        User updatedUser = userService.updateUserById(id, user);
+        if (updatedUser != null) {
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

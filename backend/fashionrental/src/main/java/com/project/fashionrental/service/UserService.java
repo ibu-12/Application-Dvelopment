@@ -56,4 +56,17 @@ public class UserService {
                 })
                 .orElseThrow(() -> new RuntimeException("User not found with this email: " + email));
     }
+
+    public User updateUserById(Long id, User updatedUser) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setName(updatedUser.getName());
+            user.setEmail(updatedUser.getEmail());
+            user.setPassword(updatedUser.getPassword());
+            user.setMobile(updatedUser.getMobile());
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }

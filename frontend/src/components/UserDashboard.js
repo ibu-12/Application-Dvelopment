@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bar, Pie } from 'react-chartjs-2';
 import 'chart.js/auto'; // Required for Chart.js to work
 import '../pages/css/UserDashboard.css'; // Import the CSS file
@@ -8,17 +8,25 @@ import profilePic from '../pages/C1.jpg'; // Ensure this image is present
 import { logoutUser } from '../redux/actions'; // Import your logout action
 import Products from './Products';
 import Cart from './Cart';
+import axios from 'axios';
+import { toast } from 'react-toastify'; // Assuming you have toast for notifications
 
 const UserDashboard = () => {
   const [cartItems, setCartItems] = useState([]);
-
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
-
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const [userProfile, setUserProfile] = useState(null);
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [editingUser, setEditingUser] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    mobile: '',
+    password: ''
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Sample data for the charts
   const barData = {
@@ -56,12 +64,89 @@ const UserDashboard = () => {
     { id: '005', product: 'Hat', price: '$15', category: 'Accessories' },
   ];
 
-  // Sample data for the products
- 
-
   const handleLogout = () => {
-    
-    window.location.href = '/';
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
+    window.history.pushState(null, "", window.location.origin);
+    window.addEventListener("popstate", function(event) {
+      window.history.pushState(null, "", window.location.origin);
+    });
+    dispatch(logoutUser());
+    window.location.href = '/login';
+  };
+
+  const fetchUserProfile = async () => {
+    try {
+      const email = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+      if (email && token) {
+        const response = await axios.get('http://localhost:8080/api/users/getAllUsers', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = response.data.find(user => user.email === email);
+        if (user) {
+          const userProfileResponse = await axios.get(`http://localhost:8080/api/users/getUserById/${user.id}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUserProfile(userProfileResponse.data);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (activeSection === 'user-profile') {
+      fetchUserProfile();
+    }
+  }, [activeSection]);
+
+  const handleEdit = (admin) => {
+    const confirmUpdate = window.confirm('Do you want to update the details?');
+
+    if (confirmUpdate) {
+      const password = prompt('Please enter the password to confirm the update:');
+
+      if (password === "USERDETAILUPDATE") {
+        setEditingUser(admin);
+        setFormData({
+          name: admin.name,
+          email: admin.email,
+          mobile: admin.mobile,
+          password: admin.password
+        });
+      } else {
+        alert('Incorrect password. Update canceled.');
+      }
+    } else {
+      alert('Update canceled.');
+    }
+  };
+
+  const handleUpdate = async (userId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      await axios.put(`http://localhost:8080/api/users/updateUserById/${userId}`, formData, config);
+      setUserProfile({ ...userProfile, ...formData });
+      setEditingUser(null);
+      toast.success('User updated successfully!');
+    } catch (error) {
+      console.error('Error updating user:', error);
+      toast.error('Error updating user.');
+    }
   };
 
   return (
@@ -74,9 +159,9 @@ const UserDashboard = () => {
         <nav className="user-nav">
           <button onClick={() => setActiveSection('dashboard')}>Dashboard</button>
           <button onClick={() => setActiveSection('orders')}>Orders</button>
-          <button onClick={() => setActiveSection('offers')}>Offers</button>
           <button onClick={() => setActiveSection('cart')}>Cart</button>
           <button onClick={() => setActiveSection('products')}>Products</button>
+          <button onClick={() => setActiveSection('user-profile')}>User Profile</button>
           <button onClick={handleLogout} className="user-logout">Logout</button>
         </nav>
       </div>
@@ -86,7 +171,7 @@ const UserDashboard = () => {
             <Link to="/" className="user-home-link">Home</Link>
           </div>
           <div className="user-user-info">
-            <img src={profilePic} className="user-profile-icon"></img>
+            <img src={profilePic} className="user-profile-icon" alt="User Icon" />
             <span className="user-username">Ibu</span>
           </div>
         </div>
@@ -142,10 +227,57 @@ const UserDashboard = () => {
             </div>
           )}
           {activeSection === 'orders' && <div>Orders Content</div>}
-          {activeSection === 'offers' && <div>Offers Content</div>}
-          {activeSection === 'products' && <Products addToCart={addToCart} />}
           {activeSection === 'cart' && <Cart cartItems={cartItems} />}
-          {/* Handle other sections like 'orders' and 'offers' similarly */}
+          {activeSection === 'products' && <Products addToCart={addToCart} />}
+          {activeSection === 'user-profile' && userProfile && (
+            <div className="user-profile-section">
+              <h1 className="user-profile-heading">User Profile</h1>
+              <div className="user-profile-details">
+                {editingUser ? (
+                  <div>
+                    <label>Name: 
+                      <input
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      />
+                    </label>
+                    <label>Email: 
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      />
+                    </label>
+                    <label>Mobile: 
+                      <input
+                        type="text"
+                        value={formData.mobile}
+                        onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                      />
+                    </label>
+                    <label>Password: 
+                      <input
+                        type="text"
+                        value={formData.password}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                      />
+                    </label>
+                    <button onClick={() => handleUpdate(userProfile.id)}>Save</button>
+                    <button onClick={() => setEditingUser(null)}>Cancel</button>
+                  </div>
+                ) : (
+                  <div>
+                    <p><strong>Name:</strong> {userProfile.name}</p>
+                    <p><strong>Email:</strong> {userProfile.email}</p>
+                    <p><strong>Mobile:</strong> {userProfile.mobile}</p>
+                    <p><strong>Password:</strong> {userProfile.password || 'N/A'}</p>
+                    <button onClick={() => handleEdit(userProfile)}>Edit</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

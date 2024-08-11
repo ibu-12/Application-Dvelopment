@@ -4,6 +4,7 @@ import { setUser } from '../redux/actions';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import '../pages/css/RegistrationPage.css';
+import axios from 'axios';
 
 const RegistrationPage = () => {
   const [username, setUsername] = useState('');
@@ -13,8 +14,9 @@ const RegistrationPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const apiurl="http://127.0.0.1:8080/api/users/createUser";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if all fields are filled
@@ -31,9 +33,29 @@ const RegistrationPage = () => {
 
     const user = { username, email, phoneNumber, password };
     dispatch(setUser(user));
-    navigate('/login');
+    const newData= await axios
+      .post(apiurl,{
+        id:0,
+        name: username,
+        email: email,
+        password: password,
+        mobile: phoneNumber,
+        roles: "USER"
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error)=>{
+        console.error(error);
+      });
+    if(newData){
+      alert("Something went wrong");
+    }
+    else{
+      alert("User created successfully");
+      navigate('/login');
+    }
   };
-
   return (
     <div>
       <Navbar />
