@@ -60,6 +60,7 @@ public class SecurityConfig {
                                                                 "/api/users/**",
                                                                 "/api/auth/**",
                                                                 "/api/orders/**",
+                                                                "/api/payments/**",
                                                                 "/api/product/**")
                                                 .authenticated())
                                 .sessionManagement(session -> session

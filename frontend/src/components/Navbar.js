@@ -1,15 +1,22 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import '../pages/css/Navbar.css';
 import { logoutUser } from '../redux/actions';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  const navigate= useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
+    window.history.pushState(null, "", window.location.origin);
+    window.addEventListener("popstate", function(event) {
+      window.history.pushState(null, "", window.location.origin);
+    });
     dispatch(logoutUser());
+    window.location.href = '/login';
   };
 
   return (

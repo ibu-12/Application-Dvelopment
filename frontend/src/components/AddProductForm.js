@@ -12,7 +12,6 @@ const AddProductForm = () => {
   const [products, setProducts] = useState([]); // Assuming this is where you're storing product data
   const apiUrl2 = "http://127.0.0.1:8080/api/product"; // Base API URL
   const navigate = useNavigate();
-  
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -26,11 +25,12 @@ const AddProductForm = () => {
       };
 
       const newProduct = {
+        productId:0,
         productName: productName,
-        price: productPrice,
-        description: productDescription,
+        productimage: productImage,
         size: productSize,
-        image: productImage,
+        description: productDescription,
+        price: productPrice,
       };
 
       const response = await axios.post(`${apiUrl2}/addProduct`, newProduct, config);

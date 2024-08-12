@@ -33,7 +33,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Perfect Fits</h3>
                 <p> Enjoy the perfect balance of fashion and function with perfectly fitted clothes.</p>
-                <a href="#readmore1" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -41,7 +41,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>T shirts</h3>
                 <p>They come in different styles, colors, and designs, offering a casual and stylish look.</p>
-                <a href="#readmore2" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -49,7 +49,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Accessories</h3>
                 <p>Discover a wide range of trendy accessories to complement your fashion rentals.</p>
-                <a href="#readmore3" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Pair Wear</h3>
                 <p>Pair Wear offers curated fashion rentals, featuring designer outfits for every occasion. </p>
-                <a href="#readmore4" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -68,7 +68,7 @@ const HomePage = () => {
                 <h3>Heavy Clothes</h3>
                 <p>
                 Discover our selection of heavy clothes for rental, perfect for cold weather and outdoor adventures.</p>
-                <a href="#readmore5" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -76,7 +76,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Party Wear</h3>
                 <p> Choose from stunning dresses, elegant suits, and chic accessories for any celebration.</p>
-                <a href="#readmore6" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Combos</h3>
                 <p>Discover our fashion combos, perfectly paired outfits for any occasion.</p>
-                <a href="#readmore7" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -94,7 +94,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Formals</h3>
                 <p>Upgrade your professional wardrobe with our formal wear rentals.</p>
-                <a href="#readmore8" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
             <div className="home-card">
@@ -102,7 +102,7 @@ const HomePage = () => {
               <div className="home-card-content">
                 <h3>Cost Effecient</h3>
                 <p>Access designer outfits and high-quality garments without the high price tags.</p>
-                <a href="#readmore9" className="home-read-more-link">Read more</a>
+                <a href="/Login" className="home-read-more-link">Read more</a>
               </div>
             </div>
           </div>
@@ -119,9 +119,9 @@ const HomePage = () => {
           <div className="home-info-column">
             <h4>Company Info</h4>
             <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#careers">Careers</a></li>
-              <li><a href="#press">Press</a></li>
+              <li><a href="/Landing">About Us</a></li>
+              <li><a href="/sustainability">Sustainability</a></li>
+              
             </ul>
           </div>
           <div className="home-info-column">

@@ -4,7 +4,7 @@ import '../pages/css/Cart.css';
 
 const Cart = ({ cartItems }) => {
   const [showPaymentForm, setShowPaymentForm] = useState(false);
-  const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price.replace('$', '')), 0);
+  const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price), 0);
 
   return (
     <div className="cart-container">
@@ -17,15 +17,15 @@ const Cart = ({ cartItems }) => {
             ) : (
               cartItems.map((item, index) => (
                 <div key={index} className="cart-item">
-                  <img src={item.image} alt={item.name} className="cart-item-image" />
+                  <img src={item.productimage} alt={item.name} className="cart-item-image" />
                   <div className="cart-item-details">
-                    <h2 className="cart-item-name">{item.name}</h2>
+                    <h2 className="cart-item-name">{item.productName}</h2>
                     <div className="cart-item-description">
-                      <span className="cart-item-size">Size: {item.size}</span>
-                      <span className="cart-item-color">Color: {item.color}</span>
-                      <span className="cart-item-type">Type: {item.type}</span>
+                      <span className="cart-item-size">Description: {item.description}</span>
+                      <span className="cart-item-color">Size: {item.size}</span>
+                      {/* <span className="cart-item-type">Type: {item.type}</span> */}
                       {item.type !== 'Swap' && <span className="cart-item-price">Price: {item.price}</span>}
-                      <button className="cart-item-remove">Remove</button>
+                      {/* <button className="cart-item-remove">Remove</button> */}
                     </div>
                   </div>
                 </div>

@@ -16,7 +16,7 @@ import axios from 'axios';
 const Products = ({ addToCart }) => {
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  const [productData, setProductData] = useState([]);
   const products = [
     { id: 'p001', image: p1, name: 'Red Dress', price: '$50', size: 'M', color: 'Red', type: 'Rent', duration: 'Day' },
     { id: 'p002', image: p2, name: 'Blue Jeans', price: '$40', size: 'L', color: 'Blue', type: 'Swap', duration: 'Week' },
@@ -35,49 +35,51 @@ const Products = ({ addToCart }) => {
     setShowPaymentForm(true);
   };
 
+  const fetchProducts = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        'http://127.0.0.1:8080/api/product/getAllProducts',
+        config
+      );
+      setProductData(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchData= async () =>{
-      try{
-        const token=localStorage.getItem("token");
-        const config={
-          headers:{
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          }
-        };
-        const response= await axios.get(
-          "http://127.0.0.1:8080/api/product/getAllProducts",
-          config
-        );
-      }catch(error){
-        console.error(error);
-      }
-    };
-    fetchData();
-  },[]);
+    fetchProducts();
+  }, []);
+  
   return (
     <div className="products-container">
       <h1 className="products-heading">Products</h1>
 
       {!showPaymentForm ? (
         <div className="products-grid">
-          {products.map((product) => (
+          {productData.map((product) => (
             <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h2 className="product-name">{product.name}</h2>
-              {product.type === 'Rent' && <p className="product-price">{product.price}</p>}
+              <img src={product.productimage} alt={product.productName} className="product-image" />
+              <h2 className="product-name">{product.productName}</h2>
+              
+              {<p className="product-price">${product.price}</p>}
               <p className="product-size">Size: {product.size}</p>
-              <p className="product-color">Color: {product.color}</p>
-              <p className="product-type">Type: {product.type}</p>
+              <p className="product-color">Description: {product.description}</p>
+              {/* <p className="product-type">Type: {product.type}</p> */}
               <p className="product-duration">Duration: {product.duration}</p>
-              {product.type === 'Rent' ? (
+              
                 <>
                   <button onClick={() => addToCart(product)}>Add to Cart</button>
                   <button onClick={() => handleBuyNow(product)}>Buy</button>
                 </>
-              ) : (
-                <button>Swap</button>
-              )}
+             
             </div>
           ))}
         </div>

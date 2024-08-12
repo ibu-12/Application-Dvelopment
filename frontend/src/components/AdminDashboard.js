@@ -10,6 +10,7 @@ import AddProductForm from './AddProductForm';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PaymentList from './AllPayments';
 
 const AdminDashboard = () => {
   const user = useSelector((state) => state.user);
@@ -201,7 +202,8 @@ const AdminDashboard = () => {
       productName: product.productName,
       description: product.description,
       price: product.price,
-      size: product.size
+      size: product.size,
+      productimage: product.productimage
     });
   };
   const handleUpdateProduct = async (productId) => {
@@ -276,18 +278,13 @@ const AdminDashboard = () => {
       <div className="admin-sidebar">
         <div className="admin-profile">
           <img src={profilePic} alt="Profile" className="admin-profile-pic" />
-          <p>Hi, </p>
+          <p>Hi, Ibu</p>
         </div>
         <nav className="admin-nav">
           <Link to="#" onClick={() => setActiveSection('dashboard')}>
             Dashboard
           </Link>
-          <Link to="#" onClick={() => setActiveSection('rentals')}>
-            Rentals
-          </Link>
-          <Link to="#" onClick={() => setActiveSection('swappings')}>
-            Swappings
-          </Link>
+          <button onClick={() => setActiveSection('orders')}>Payments</button>
           <Link to="#" onClick={() => setActiveSection('add-product')}>
             Add Products
           </Link>
@@ -308,12 +305,12 @@ const AdminDashboard = () => {
       <div className="admin-main">
         <div className="admin-topbar">
           <div className="topbar-left">
-            <Link to="/" className="admin-home-link">
+            {/* <Link to="/" className="admin-home-link">
               Home
-            </Link>
+            </Link> */}
           </div>
           <div className="admin-user-info">
-            <i className="admin-profile-icon"></i>
+            <img src={profilePic} alt="Profile" className="admin-profile-icon" />
             <span className="admin-username">Ibu</span>
           </div>
         </div>
@@ -349,6 +346,7 @@ const AdminDashboard = () => {
               </div>
             </div>
           )}
+          {activeSection === 'orders' && <PaymentList/>}
           {activeSection === 'rentals' && (
             <div className="admin-recent-rentals">
               <h1 className="admin-recent-rentals-heading">Recent Rentals</h1>
@@ -449,12 +447,12 @@ const AdminDashboard = () => {
                         >
                           Edit
                         </button>
-                        <button
+                        {/* <button
                           className="admin-delete-button"
                           onClick={() => handleDelete(user.id)}
                         >
                           Delete
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   ))}
@@ -497,6 +495,7 @@ const AdminDashboard = () => {
       <thead>
         <tr>
           <th>ProductId</th>
+          <th>ProductImage</th>
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
@@ -508,6 +507,14 @@ const AdminDashboard = () => {
         {productData.map((product, index) => (
           <tr key={index} className="product-row">
             <td className="product-name">{product.productId}</td>
+            <td className="product-name"><img 
+                  src={product.productimage} 
+                  alt={product.productName} 
+                  className="admin-product-image" 
+                  onError={(e) => {
+                    e.target.src = '/path/to/default-image.jpg'; // Fallback image
+                  }}
+                /></td>
             <td className="product-name">{product.productName}</td>
             <td className="product-description">{product.description}</td>
             <td className="product-price">{product.price}</td>
@@ -531,39 +538,51 @@ const AdminDashboard = () => {
           </tr>
         ))}
         {editingProduct && (
-          <div className="edit-product-form">
-            <h3>Edit Product</h3>
+          <div className="edit-form-container">
+            <h3 className="edit-form-title">Edit Product</h3>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleUpdateProduct(editingProduct.productId);
               }}
+              className="edit-form"
             >
               <input
                 type="text"
                 placeholder="Product Name"
                 value={productFormData.productName}
                 onChange={(e) => setProductFormData({ ...productFormData, productName: e.target.value })}
+                className="edit-form-input"
               />
               <input
                 type="text"
                 placeholder="Description"
                 value={productFormData.description}
                 onChange={(e) => setProductFormData({ ...productFormData, description: e.target.value })}
+                className="edit-form-input"
               />
               <input
                 type="text"
                 placeholder="Price"
                 value={productFormData.price}
                 onChange={(e) => setProductFormData({ ...productFormData, price: e.target.value })}
+                className="edit-form-input"
               />
               <input
                 type="text"
                 placeholder="Size"
                 value={productFormData.size}
                 onChange={(e) => setProductFormData({ ...productFormData, size: e.target.value })}
+                className="edit-form-input"
               />
-              <button type="submit">Update</button>
+              <input
+                type="text"
+                placeholder="URL"
+                value={productFormData.productimage}
+                onChange={(e) => setProductFormData({ ...productFormData, productimage: e.target.value })}
+                className="edit-form-input"
+              />
+              <button type="submit" className="edit-form-submit-btn">Update</button>
               <button type="button" onClick={() => setEditingProduct(null)} className="edit-form-cancel-btn">Cancel</button>
             </form>
           </div>

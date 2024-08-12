@@ -10,11 +10,13 @@ import Products from './Products';
 import Cart from './Cart';
 import axios from 'axios';
 import { toast } from 'react-toastify'; // Assuming you have toast for notifications
+import PaymentList from './AllPayments';
 
 const UserDashboard = () => {
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
+    alert("Item Added to cart");
   };
   const [userProfile, setUserProfile] = useState(null);
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -158,7 +160,7 @@ const UserDashboard = () => {
         </div>
         <nav className="user-nav">
           <button onClick={() => setActiveSection('dashboard')}>Dashboard</button>
-          <button onClick={() => setActiveSection('orders')}>Orders</button>
+          {/* <button onClick={() => setActiveSection('orders')}>Payments</button> */}
           <button onClick={() => setActiveSection('cart')}>Cart</button>
           <button onClick={() => setActiveSection('products')}>Products</button>
           <button onClick={() => setActiveSection('user-profile')}>User Profile</button>
@@ -168,7 +170,7 @@ const UserDashboard = () => {
       <div className="user-main">
         <div className="user-topbar">
           <div className="topbar-left">
-            <Link to="/" className="user-home-link">Home</Link>
+            {/* <Link to="/" className="user-home-link">Home</Link> */}
           </div>
           <div className="user-user-info">
             <img src={profilePic} className="user-profile-icon" alt="User Icon" />
@@ -226,7 +228,7 @@ const UserDashboard = () => {
               </div>
             </div>
           )}
-          {activeSection === 'orders' && <div>Orders Content</div>}
+          {activeSection === 'orders' && <PaymentList/>}
           {activeSection === 'cart' && <Cart cartItems={cartItems} />}
           {activeSection === 'products' && <Products addToCart={addToCart} />}
           {activeSection === 'user-profile' && userProfile && (

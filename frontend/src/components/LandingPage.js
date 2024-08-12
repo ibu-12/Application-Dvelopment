@@ -28,7 +28,7 @@ const LandingPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="landing-container">
+      <div className="landing-container" id="Landing">
         <div className="landing-slideshow-container">
           <div className="landing-slide-container">
             <img
