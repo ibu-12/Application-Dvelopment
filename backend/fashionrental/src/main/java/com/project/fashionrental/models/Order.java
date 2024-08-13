@@ -1,6 +1,9 @@
 package com.project.fashionrental.models;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,12 +35,15 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @OneToOne(mappedBy = "order")
+    @JsonIgnore
     private Payment payment;
 
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId")
+    @JsonIgnore
     private Product product;
 }

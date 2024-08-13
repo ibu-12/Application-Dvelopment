@@ -229,7 +229,7 @@ const UserDashboard = () => {
             </div>
           )}
           {activeSection === 'orders' && <PaymentList/>}
-          {activeSection === 'cart' && <Cart cartItems={cartItems} />}
+          {activeSection === 'cart' && <Cart cartItems={cartItems} setCartItems={setCartItems} />}
           {activeSection === 'products' && <Products addToCart={addToCart} />}
           {activeSection === 'user-profile' && userProfile && (
             <div className="user-profile-section">

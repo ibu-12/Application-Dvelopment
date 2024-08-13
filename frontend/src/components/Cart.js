@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import PaymentForm from './PaymentForm';
 import '../pages/css/Cart.css';
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems,setCartItems }) => {
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price), 0);
-
+  const removeCartItem = (index) => {
+    const updatedCartItems = cartItems.filter((item, i) => i !== index);
+    setCartItems(updatedCartItems);
+  };
   return (
     <div className="cart-container">
       <h1 className="cart-heading">Cart</h1>
@@ -25,7 +28,7 @@ const Cart = ({ cartItems }) => {
                       <span className="cart-item-color">Size: {item.size}</span>
                       {/* <span className="cart-item-type">Type: {item.type}</span> */}
                       {item.type !== 'Swap' && <span className="cart-item-price">Price: {item.price}</span>}
-                      {/* <button className="cart-item-remove">Remove</button> */}
+                      <button onClick={() => removeCartItem(index)} className="cart-item-remove">Remove</button>
                     </div>
                   </div>
                 </div>
